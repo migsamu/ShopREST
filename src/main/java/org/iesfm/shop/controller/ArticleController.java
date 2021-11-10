@@ -19,7 +19,7 @@ public class ArticleController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/articles")
-    public List<Article> list(@RequestParam(name = "tag") String tag) {
+    public List<Article> list(@RequestParam(name = "tag", required = false) String tag) {
         if (tag == null) {
             return articleDAO.list();
         } else {
@@ -52,5 +52,10 @@ public class ArticleController {
         articleDAO.update(article);
     }
 
-
+    @RequestMapping(method = RequestMethod.DELETE, path = "/articles/{id}")
+    public void delete(@PathVariable("id") Article article) {
+        if (!articleDAO.delete(article.getId())) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El articulo no existe");
+        }
+    }
 }
