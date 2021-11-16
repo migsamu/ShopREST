@@ -45,8 +45,15 @@ public class JDBCArticlesDAO implements ArticleDAO {
 
     }
 
+    private List<Article> articlesByTag(String tag){
+
+        return null;
+    }
+
     @Override
     public List<Article> list(String tag) {
+
+
         return null;
     }
 

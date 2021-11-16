@@ -1,6 +1,5 @@
 package org.iesfm.shop.dao.inmemory;
 
-import org.iesfm.shop.Article;
 import org.iesfm.shop.Client;
 import org.iesfm.shop.dao.ClientDAO;
 

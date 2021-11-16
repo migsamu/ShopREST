@@ -1,6 +1,5 @@
 package org.iesfm.shop.dao;
 
-import org.iesfm.shop.Article;
 import org.iesfm.shop.Client;
 
 import java.util.List;
