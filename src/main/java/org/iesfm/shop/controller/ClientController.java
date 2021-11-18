@@ -2,10 +2,9 @@ package org.iesfm.shop.controller;
 
 import org.iesfm.shop.Client;
 import org.iesfm.shop.dao.ClientDAO;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -25,7 +24,34 @@ public class ClientController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/clients")
     public void insert(@RequestBody Client client) {
-        clientDAO.insert(client);
+        if (!clientDAO.insert(client)) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "El cliente ya existe");
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/clients/{id}")
+    public Client getClientById(@PathVariable("id") int id) {
+
+        Client client = clientDAO.get(id);
+
+        if (client == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El cliente no existe");
+        }
+        return client;
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/clients/{id}")
+    public void update(@RequestBody() Client client) {
+        if (!clientDAO.update(client)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "El cliente no existe");
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/clients/{id}")
+    public void delete(@PathVariable("id") int id) {
+        if (!clientDAO.delete(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"El cliente no existe");
+        }
     }
 
 }
