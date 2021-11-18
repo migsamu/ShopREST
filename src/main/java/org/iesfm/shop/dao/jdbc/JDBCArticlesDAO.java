@@ -12,6 +12,9 @@ public class JDBCArticlesDAO implements ArticleDAO {
 
     private static final String SELECT_ARTICLES = "SELECT * FROM Article ";
     private static final String SELECT_ARTICLES_BY_ARTICLES_ID = "SELECT name FROM Tag where article_id = :article_id ";
+    private static final String SELECT_ARTICLES_BY_TAG =
+            "SELECT a. * " +
+                    "FROM Article a ";
 
     private final RowMapper<Article> ARTICLE_ROW_MAPPER =
             ((rs, rowNum) -> new Article(
@@ -45,7 +48,7 @@ public class JDBCArticlesDAO implements ArticleDAO {
 
     }
 
-    private List<Article> articlesByTag(String tag){
+    private List<Article> articlesByTag(String tag) {
 
         return null;
     }
