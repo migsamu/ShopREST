@@ -61,7 +61,7 @@ public class JDBCArticlesDAO implements ArticleDAO {
         params.put("tag", tag);
 
         return jdbc.query(
-                SELECT_ARTICLES_BY_ARTICLES_ID,
+                SELECT_ARTICLES_BY_TAG,
                 params,
                 (rs, n) ->
                         rs.getInt("article_id"));
